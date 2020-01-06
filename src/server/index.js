@@ -2,27 +2,16 @@ import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import App from '../components/App.jsx';
-
+import htmlTemplate from './mainViewTemplate';
 const app = express();
 app.use('/static', express.static("dist/public"));
 
 app.get('/app', (req, res) => {
-  const name = 'Marvelous Wololo';
+  const state = { use: 'reduxState' };
 
-  const component = ReactDOMServer.renderToString(<App/>);
+  const component = ReactDOMServer.renderToString(<App />);
 
-  const html = `
-  <!doctype html>
-    <html>
-    <title>Hello App</title>
-    <head>
-      <script>window.__INITIAL__DATA__ = ${JSON.stringify({ name })}</script>
-    </head>
-    <body>
-    <div id="root">${component}</div>
-    <script src="/static/app.bundle.js"></script>
-  </body>
-  </html>`
+  const html = htmlTemplate(component, state);
 
   res.send(html);
 });

@@ -27,15 +27,7 @@ const clientConfig = {
         test: /\.less$/,
         use: [
           {
-            loader: 'style-loader', // creates style nodes from JS strings
-          },
-          {
             loader: 'css-loader', // translates CSS into CommonJS
-            options: {
-              modules: true,
-              importLoaders: 1,
-              sourceMap: true
-            }
           },
           {
             loader: 'less-loader', // compiles Less to CSS

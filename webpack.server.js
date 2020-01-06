@@ -1,7 +1,9 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const nodeExternals = require('webpack-node-externals');
 const path = require('path');
-
+const devMode = process.env.NODE_ENV !== 'production';
+const dist = path.resolve(__dirname, './dist')
 const serverConfig = {
   target: 'node',
   entry: {
@@ -12,6 +14,12 @@ const serverConfig = {
     filename: 'server.bundle.js'
   },
   externals: [nodeExternals()],
+  plugins: [new MiniCssExtractPlugin({
+    // Options similar to the same options in webpackOptions.output
+    // both options are optional
+    filename: '/public/[name].css',
+    chunkFilename: '/public/[id].css'
+  })],
   module: {
     rules: [
       {
@@ -28,15 +36,10 @@ const serverConfig = {
         test: /\.less$/,
         use: [
           {
-            loader: 'style-loader', // creates style nodes from JS strings
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader', // translates CSS into CommonJS
-            options: {
-              modules: true,
-              importLoaders: 1,
-              sourceMap: true
-            }
           },
           {
             loader: 'less-loader', // compiles Less to CSS

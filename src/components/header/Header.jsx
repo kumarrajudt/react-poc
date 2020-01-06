@@ -1,12 +1,12 @@
 import React from 'react';
-import "./style.less";
+import "./header.less";
 class Header extends React.Component {
     render() {
-        return (<div class="header">
-            <div class="header__title">
+        return (<div className="header">
+            <div className="header__title">
                 <div>Demo App</div>
             </div>
-            <div class="header__settings">Settings</div>
+            <div className="header__settings">Settings</div>
         </div>);
     }
 }

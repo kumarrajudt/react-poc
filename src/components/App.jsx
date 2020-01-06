@@ -1,11 +1,14 @@
 import React from  'react';
-import './app.less';
+import './App.less';
+import Header from './header/header.jsx'
 class App extends React.Component {
     click(){
         alert('Hi My World!!!');
     }
     render(){
-        return (<div><button onClick={() => this.click()}>Click me!</button>
+        return (<div>
+            <Header></Header>
+            <button onClick={() => this.click()}>Click me!</button>
             Hello World!</div>);
     }
 }
